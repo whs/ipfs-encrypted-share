@@ -116,10 +116,12 @@ export default class Downloader extends React.Component {
       axios.get(`${IPFS_HOST}/ipfs/${this.props.hash}/metadata.json`)
     ])
       .then(res => {
+        let metadata = decryptMetadata(res[1].data, this.props.encryptKey);
         this.setState({
-          metadata: decryptMetadata(res[1].data, this.props.encryptKey),
+          metadata,
           state: STATE_WAIT_USER
         });
+        document.title = metadata.filename;
       })
       .catch(err => {
         this.setState({
