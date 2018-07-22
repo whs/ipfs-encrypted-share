@@ -6,6 +6,7 @@ import axios from "axios";
 import sodium from "libsodium-wrappers";
 import { decryptMetadata, decrypt } from "./lib/browserdecrypt";
 import FileMetadata from "./components/FileMetadata";
+import VersionDisplay from "./components/VersionDisplay";
 
 const IPFS_HOST = "";
 const STATE_DOWNLOAD_METADATA = 0;
@@ -53,6 +54,7 @@ export default class Downloader extends React.Component {
     return (
       <div className={outer}>
         <div className={inner}>{this.renderBody()}</div>
+        <VersionDisplay />
       </div>
     );
   }

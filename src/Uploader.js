@@ -5,6 +5,7 @@ import ipfsApi from "ipfs-api";
 import toBuffer from "typedarray-to-buffer";
 import { from_string } from "libsodium-wrappers";
 import browserEncrypt from "./lib/browserencrypt";
+import VersionDisplay from "./components/VersionDisplay";
 
 const IPFS_KEY = "ipfsenc_ipfs";
 const IPFS_VIEWER_BASE = window.location;
@@ -56,6 +57,7 @@ export default class Uploader extends React.Component {
             </p>
           </Upload.Dragger>
         </div>
+        <VersionDisplay />
       </div>
     );
   }
