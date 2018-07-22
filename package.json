@@ -1,6 +1,7 @@
 {
   "name": "ipfs-encryptedshare",
   "version": "0.1.0",
+  "homepage": ".",
   "dependencies": {
     "antd": "^3.7.1",
     "axios": "^0.18.0",
