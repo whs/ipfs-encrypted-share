@@ -8,7 +8,8 @@ import { decryptMetadata, decrypt } from "./lib/browserdecrypt";
 import FileMetadata from "./components/FileMetadata";
 import VersionDisplay from "./components/VersionDisplay";
 
-const IPFS_HOST = "";
+const IPFS_HOST =
+  process.env.NODE_ENV === "production" ? "" : "http://localhost:5002";
 const STATE_DOWNLOAD_METADATA = 0;
 const STATE_WAIT_USER = 1;
 const STATE_DOWNLOAD_DATA = 2;
