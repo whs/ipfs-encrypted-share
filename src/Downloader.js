@@ -7,7 +7,7 @@ import sodium from "libsodium-wrappers";
 import { decryptMetadata, decrypt } from "./lib/browserdecrypt";
 import FileMetadata from "./components/FileMetadata";
 
-const IPFS_HOST = "http://localhost:5002";
+const IPFS_HOST = "";
 const STATE_DOWNLOAD_METADATA = 0;
 const STATE_WAIT_USER = 1;
 const STATE_DOWNLOAD_DATA = 2;
