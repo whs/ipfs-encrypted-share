@@ -1,5 +1,7 @@
 # IPFS Encrypted Share
 
+Current version: [0.2.0](https://ipfs.io/ipfs/QmcmqrfMQfLJJPc1sVMg5ajWZH9Qs4f4dpHrDSXrT1gY4f/)
+
 Encrypted file uploader for IPFS, similar to [Mega](https://mega.co.nz/)
 
 TODO: Name this something cooler
