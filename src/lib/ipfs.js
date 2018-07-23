@@ -22,7 +22,6 @@ export const upload = (endpoint, files, onProgress = () => {}) => {
 		baseURL: endpoint,
 		params: {
 			recursive: 'true',
-			pin: 'false',
 		},
 		data: body,
 		responseType: 'text',
