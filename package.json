@@ -1,29 +1,27 @@
 {
-  "name": "ipfs-encryptedshare",
-  "version": "0.1.0",
-  "homepage": ".",
-  "dependencies": {
-    "antd": "^3.7.1",
-    "axios": "^0.18.0",
-    "emotion": "^9.2.6",
-    "ipfs-api": "^22.2.4",
-    "libsodium-wrappers": "^0.7.3",
-    "promise-file-reader": "^1.0.2",
-    "prop-types": "^15.6.2",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-scripts": "1.1.4",
-    "typedarray-to-buffer": "^3.1.5"
-  },
-  "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test --env=jsdom",
-    "eject": "react-app-rewired eject"
-  },
-  "devDependencies": {
-    "babel-plugin-import": "^1.8.0",
-    "react-app-rewire-emotion": "^4.0.0",
-    "react-app-rewired": "^1.5.2"
-  }
+	"name": "ipfs-encryptedshare",
+	"version": "0.1.0",
+	"homepage": ".",
+	"dependencies": {
+		"antd": "^3.7.1",
+		"axios": "^0.18.0",
+		"emotion": "^9.2.6",
+		"libsodium-wrappers": "^0.7.3",
+		"promise-file-reader": "^1.0.2",
+		"prop-types": "^15.6.2",
+		"react": "^16.4.1",
+		"react-dom": "^16.4.1",
+		"react-scripts": "1.1.4"
+	},
+	"scripts": {
+		"start": "react-app-rewired start",
+		"build": "react-app-rewired build",
+		"test": "react-app-rewired test --env=jsdom",
+		"eject": "react-app-rewired eject"
+	},
+	"devDependencies": {
+		"babel-plugin-import": "^1.8.0",
+		"react-app-rewire-emotion": "^4.0.0",
+		"react-app-rewired": "^1.5.2"
+	}
 }

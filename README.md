@@ -10,9 +10,9 @@ Your file are encrypted by [libsodium authenticated encryption](https://download
 
 File metadata are also written to IPFS as unencrypted JSON file. The information stored are:
 
-- Encrypted filename
-- File size
-- Key-specific file hash (MAC)
+-   Encrypted filename
+-   File size
+-   Key-specific file hash (MAC)
 
 ## Security
 

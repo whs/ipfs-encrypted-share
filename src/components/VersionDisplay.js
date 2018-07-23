@@ -1,18 +1,17 @@
-import React from "react";
-import { css } from "emotion";
+import React from 'react';
+import { css } from 'emotion';
 
 const versionDisplay = css`
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  color: #ccc;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	color: #ccc;
 `;
 
 export default () => (
-  <a
-    href="https://github.com/whs/ipfs-encrypted-share"
-    className={versionDisplay}
-  >
-    v{process.env.VERSION}
-  </a>
+	<a
+		href="https://github.com/whs/ipfs-encrypted-share"
+		className={versionDisplay}>
+		v{process.env.VERSION}
+	</a>
 );
