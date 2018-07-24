@@ -8,11 +8,7 @@ export const upload = (endpoint, files, onProgress = () => {}) => {
 		if (item.content instanceof Blob) {
 			body.append(item.path, item.content, item.path);
 		} else {
-			body.append(
-				item.path,
-				new Blob([from_string(item.content)]),
-				item.path
-			);
+			body.append(item.path, new Blob([from_string(item.content)]), item.path);
 		}
 	}
 

@@ -8,8 +8,7 @@ import Decryptor from './lib/browserdecrypt';
 import FileMetadata from './components/FileMetadata';
 import VersionDisplay from './components/VersionDisplay';
 
-const IPFS_HOST =
-	process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5002';
+const IPFS_HOST = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5002';
 const STATE_DOWNLOAD_METADATA = 0;
 const STATE_WAIT_USER = 1;
 const STATE_DOWNLOAD_DATA = 2;
@@ -69,11 +68,7 @@ export default class Downloader extends React.Component {
 			return (
 				<div>
 					<FileMetadata metadata={this.state.metadata} />
-					<Button
-						type="primary"
-						icon="download"
-						size="large"
-						onClick={this.startDownload}>
+					<Button type="primary" icon="download" size="large" onClick={this.startDownload}>
 						Start downloading
 					</Button>
 				</div>
@@ -109,10 +104,7 @@ export default class Downloader extends React.Component {
 	}
 
 	fetchMetadata() {
-		Promise.all([
-			sodium.ready,
-			axios.get(`${IPFS_HOST}/ipfs/${this.props.hash}/metadata.json`),
-		])
+		Promise.all([sodium.ready, axios.get(`${IPFS_HOST}/ipfs/${this.props.hash}/metadata.json`)])
 			.then((res) => {
 				this.decryptor = new Decryptor(this.props.encryptKey);
 				let metadata = this.decryptor.decryptMetadata(res[1].data);
@@ -151,34 +143,23 @@ export default class Downloader extends React.Component {
 		};
 
 		let fetchNextPiece = () => {
-			console.log(
-				`Piece ${currentPiece + 1}/${this.state.metadata.pieces}`
-			);
+			console.log(`Piece ${currentPiece + 1}/${this.state.metadata.pieces}`);
 			axios
-				.get(
-					`${IPFS_HOST}/ipfs/${
-						this.props.hash
-					}/pieces/${currentPiece}`,
-					{
-						responseType: 'arraybuffer',
-						onDownloadProgress: (e) => {
-							let baseProgress = currentPiece * percentPerPiece;
-							let progress =
-								(baseProgress +
-									(e.loaded / e.total) * percentPerPiece) *
-								100;
-							document.title = Math.floor(progress) + '%';
+				.get(`${IPFS_HOST}/ipfs/${this.props.hash}/pieces/${currentPiece}`, {
+					responseType: 'arraybuffer',
+					onDownloadProgress: (e) => {
+						let baseProgress = currentPiece * percentPerPiece;
+						let progress = (baseProgress + (e.loaded / e.total) * percentPerPiece) * 100;
+						document.title = Math.floor(progress) + '%';
 
-							this.setState({
-								progress,
-							});
-						},
-					}
-				)
+						this.setState({
+							progress,
+						});
+					},
+				})
 				.then((res) => {
 					let buffer = new Uint8Array(res.data);
-					let isLast =
-						currentPiece === this.state.metadata.pieces - 1;
+					let isLast = currentPiece === this.state.metadata.pieces - 1;
 					pieces.push(this.decryptor.decrypt(buffer, isLast));
 					currentPiece++;
 

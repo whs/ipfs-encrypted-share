@@ -21,10 +21,7 @@ export default (props) => (
 	<div className={title}>
 		<Icon type="file" style={{ fontSize: 24 }} />
 		<div className={fileTitle}>
-			<span className={filename}>{props.metadata.filename}</span> ({
-				props.metadata.size
-			}{' '}
-			bytes)
+			<span className={filename}>{props.metadata.filename}</span> ({props.metadata.size} bytes)
 		</div>
 	</div>
 );

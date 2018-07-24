@@ -9,9 +9,7 @@ const versionDisplay = css`
 `;
 
 export default () => (
-	<a
-		href="https://github.com/whs/ipfs-encrypted-share"
-		className={versionDisplay}>
+	<a href="https://github.com/whs/ipfs-encrypted-share" className={versionDisplay}>
 		v{process.env.VERSION}
 	</a>
 );

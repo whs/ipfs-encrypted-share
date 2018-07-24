@@ -49,9 +49,7 @@ export default class Uploader extends React.Component {
 						<p className="ant-upload-drag-icon">
 							<Icon type="inbox" />
 						</p>
-						<p className="ant-upload-text">
-							Click or drag file to this area to upload
-						</p>
+						<p className="ant-upload-text">Click or drag file to this area to upload</p>
 					</Upload.Dragger>
 				</div>
 				<VersionDisplay />
@@ -116,12 +114,7 @@ export default class Uploader extends React.Component {
 		if (file.status === 'done') {
 			for (let item of fileList) {
 				if (item.uid === file.uid) {
-					item.url =
-						IPFS_VIEWER_BASE +
-						'#' +
-						file.response.ipfs +
-						':' +
-						file.response.key;
+					item.url = IPFS_VIEWER_BASE + '#' + file.response.ipfs + ':' + file.response.key;
 				}
 			}
 		}

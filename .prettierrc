@@ -5,3 +5,4 @@ singleQuote: true
 trailingComma: es5
 jsxBracketSameLine: true
 arrowParens: always
+printWidth: 120

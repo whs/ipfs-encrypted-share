@@ -4,18 +4,12 @@ import sodium from 'libsodium-wrappers';
 const FILE_CHUNK_SIZE = 5 * 1024 * 1024;
 
 export default (file, progress = () => {}) => {
-	return Promise.all([
-		PromiseFileReader.readAsArrayBuffer(file),
-		sodium.ready,
-	]).then((res) => {
+	return Promise.all([PromiseFileReader.readAsArrayBuffer(file), sodium.ready]).then((res) => {
 		let buffer = res[0];
 		res = null;
 
 		let key = sodium.crypto_secretstream_xchacha20poly1305_keygen();
-		let {
-			state,
-			header,
-		} = sodium.crypto_secretstream_xchacha20poly1305_init_push(key);
+		let { state, header } = sodium.crypto_secretstream_xchacha20poly1305_init_push(key);
 
 		// encrypt the metadata
 		let piecesCount = Math.ceil(buffer.byteLength / FILE_CHUNK_SIZE);
@@ -24,9 +18,7 @@ export default (file, progress = () => {}) => {
 			size: file.size,
 			pieces: piecesCount,
 		};
-		let metadataBuffer = sodium.from_string(
-			JSON.stringify(encryptedMetadata)
-		);
+		let metadataBuffer = sodium.from_string(JSON.stringify(encryptedMetadata));
 		let metadataEncrypted = sodium.crypto_secretstream_xchacha20poly1305_push(
 			state,
 			metadataBuffer,
@@ -48,19 +40,13 @@ export default (file, progress = () => {}) => {
 					length = buffer.byteLength - offset * FILE_CHUNK_SIZE;
 				}
 
-				let piece = new Uint8Array(
-					buffer,
-					offset * FILE_CHUNK_SIZE,
-					length
-				);
+				let piece = new Uint8Array(buffer, offset * FILE_CHUNK_SIZE, length);
 
 				let encrypted = sodium.crypto_secretstream_xchacha20poly1305_push(
 					state,
 					piece,
 					null,
-					isFinal
-						? sodium.crypto_secretstream_xchacha20poly1305_TAG_FINAL
-						: 0
+					isFinal ? sodium.crypto_secretstream_xchacha20poly1305_TAG_FINAL : 0
 				);
 				pieces.push(encrypted);
 
@@ -78,23 +64,14 @@ export default (file, progress = () => {}) => {
 
 		return promise.then((pieces) => {
 			let metadata = {
-				header: sodium.to_base64(
-					header,
-					sodium.base64_variants.ORIGINAL_NO_PADDING
-				),
-				encryptedMetadata: sodium.to_base64(
-					metadataEncrypted,
-					sodium.base64_variants.ORIGINAL_NO_PADDING
-				),
+				header: sodium.to_base64(header, sodium.base64_variants.ORIGINAL_NO_PADDING),
+				encryptedMetadata: sodium.to_base64(metadataEncrypted, sodium.base64_variants.ORIGINAL_NO_PADDING),
 			};
 
 			return {
 				pieces,
 				metadata,
-				key: sodium.to_base64(
-					key,
-					sodium.base64_variants.URLSAFE_NO_PADDING
-				),
+				key: sodium.to_base64(key, sodium.base64_variants.URLSAFE_NO_PADDING),
 			};
 		});
 	});
