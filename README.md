@@ -8,13 +8,7 @@ TODO: Name this something cooler
 
 ## Encryption
 
-Your file are encrypted by [libsodium authenticated encryption](https://download.libsodium.org/doc/secret-key_cryptography/authenticated_encryption.html). The encryption key are randomly generated every time and stored in URL fragment (not transmitted to gateway or IPFS).
-
-File metadata are also written to IPFS as unencrypted JSON file. The information stored are:
-
--   Encrypted filename
--   File size
--   Key-specific file hash (MAC)
+Your file are encrypted by [libsodium stream encryption](https://download.libsodium.org/doc/secret-key_cryptography/secretstream.html). The encryption key are randomly generated every time and stored in URL fragment (not transmitted to gateway or IPFS).
 
 ## Security
 
