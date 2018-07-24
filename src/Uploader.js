@@ -2,11 +2,10 @@ import React from 'react';
 import { css } from 'emotion';
 import { Input, Form, Upload, Icon } from 'antd';
 import browserEncrypt from './lib/browserencrypt';
-import { upload } from './lib/ipfs';
+import { upload, getSelfIpfs } from './lib/ipfs';
 import VersionDisplay from './components/VersionDisplay';
 
 const IPFS_KEY = 'ipfsenc_ipfs';
-const IPFS_VIEWER_BASE = window.location;
 
 const outer = css`
 	padding-top: 100px;
@@ -64,9 +63,10 @@ export default class Uploader extends React.Component {
 		localStorage[IPFS_KEY] = e.target.value;
 	};
 
-	onUpload = (param) => {
+	onUpload = async (param) => {
 		let encryptedResponse;
 		let endpoint = this.state.ipfsDaemon;
+		let downloader = await getSelfIpfs();
 		browserEncrypt(param.file, (percent) => {
 			param.onProgress({ percent: percent / 10 });
 		})
@@ -99,6 +99,7 @@ export default class Uploader extends React.Component {
 				(res) => {
 					let rootNode = res[res.length - 1];
 					param.onSuccess({
+						downloader: downloader,
 						ipfs: rootNode.Hash,
 						key: encryptedResponse.key,
 					});
@@ -114,7 +115,7 @@ export default class Uploader extends React.Component {
 		if (file.status === 'done') {
 			for (let item of fileList) {
 				if (item.uid === file.uid) {
-					item.url = IPFS_VIEWER_BASE + '#' + file.response.ipfs + ':' + file.response.key;
+					item.url = file.response.downloader + '#' + file.response.ipfs + ':' + file.response.key;
 				}
 			}
 		}

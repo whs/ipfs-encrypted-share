@@ -1,6 +1,24 @@
 import { from_string } from 'libsodium-wrappers';
 import axios from 'axios';
 
+let selfIpfs = null;
+
+export const getSelfIpfs = () => {
+	if (selfIpfs) {
+		return selfIpfs;
+	}
+
+	if (process.env.NODE_ENV !== 'production') {
+		return Promise.resolve(window.location.toString());
+	}
+
+	selfIpfs = axios.head(window.location).then((res) => {
+		let etag = res.headers.etag.replace(/"/g, '');
+		return `${window.location.protocol}//${window.location.host}/ipfs/${etag}`;
+	});
+	return selfIpfs;
+};
+
 export const upload = (endpoint, files, onProgress = () => {}) => {
 	let body = new FormData();
 
