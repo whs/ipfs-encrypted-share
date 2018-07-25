@@ -53,7 +53,7 @@ export default (file, progress = () => {}) => {
 				offset++;
 				progress && progress((offset / piecesCount) * 100);
 				if (offset < piecesCount) {
-					setImmediate(chunk, 10);
+					setImmediate(chunk);
 				} else {
 					resolve(pieces);
 				}
