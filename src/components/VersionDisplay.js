@@ -10,6 +10,6 @@ const versionDisplay = css`
 
 export default () => (
 	<a href="https://github.com/whs/ipfs-encrypted-share" className={versionDisplay}>
-		v{process.env.VERSION}
+		IPFS Encrypted Share v{process.env.VERSION}
 	</a>
 );
