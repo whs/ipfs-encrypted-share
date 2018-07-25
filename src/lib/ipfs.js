@@ -19,6 +19,15 @@ export const getSelfIpfs = () => {
 	return selfIpfs;
 };
 
+export const getVersion = (endpoint) => {
+	return axios({
+		method: 'GET',
+		url: '/api/v0/version',
+		baseURL: endpoint,
+		params: { number: true },
+	});
+};
+
 export const upload = (endpoint, files, onProgress = () => {}) => {
 	let body = new FormData();
 
