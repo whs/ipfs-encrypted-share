@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { Icon } from 'antd';
+import filesize from 'filesize';
 
 const title = css`
 	display: flex;
@@ -21,7 +22,7 @@ export default (props) => (
 	<div className={title}>
 		<Icon type="file" style={{ fontSize: 24 }} />
 		<div className={fileTitle}>
-			<span className={filename}>{props.metadata.filename}</span> ({props.metadata.size} bytes)
+			<span className={filename}>{props.metadata.filename}</span> ({filesize(props.metadata.size)})
 		</div>
 	</div>
 );
