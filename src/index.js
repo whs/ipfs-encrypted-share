@@ -10,11 +10,11 @@ function init() {
 			return;
 		}
 
-		import('./Downloader').then((Component) => {
+		import('./Download').then((Component) => {
 			ReactDOM.render(<Component.default hash={hash} encryptKey={key} />, document.getElementById('root'));
 		});
 	} else {
-		import('./Uploader').then((Component) => {
+		import('./Upload').then((Component) => {
 			ReactDOM.render(<Component.default />, document.getElementById('root'));
 		});
 	}

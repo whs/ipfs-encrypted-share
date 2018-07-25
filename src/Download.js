@@ -29,7 +29,7 @@ const progress = css`
 	margin-top: 48px;
 `;
 
-export default class Downloader extends React.Component {
+export default class Download extends React.Component {
 	state = {
 		metadata: null,
 		error: null,

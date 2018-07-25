@@ -1,71 +1,31 @@
 import React from 'react';
-import { css } from 'emotion';
-import { Input, Form, Upload, Icon } from 'antd';
-import browserEncrypt from './lib/browserencrypt';
-import { upload, getSelfIpfs } from './lib/ipfs';
-import VersionDisplay from './components/VersionDisplay';
-
-const IPFS_KEY = 'ipfsenc_ipfs';
-
-const outer = css`
-	padding-top: 100px;
-	padding-left: 10px;
-	padding-right: 10px;
-
-	@media (max-width: 768px) {
-		padding-top: 10px;
-	}
-`;
-const inner = css`
-	max-width: 360px;
-	margin: auto;
-`;
+import { Upload, Icon } from 'antd';
+import browserEncrypt from '../lib/browserencrypt';
+import { upload, getSelfIpfs } from '../lib/ipfs';
 
 export default class Uploader extends React.Component {
 	state = {
-		ipfsDaemon: localStorage[IPFS_KEY] || 'http://127.0.0.1:5001',
 		fileList: [],
 	};
 
 	render() {
 		return (
-			<div className={outer}>
-				<div className={inner}>
-					<h1>IPFS Encrypted Share</h1>
-					<Form.Item label="IPFS daemon address" required>
-						<Input
-							value={this.state.ipfsDaemon}
-							placeholder="http://127.0.0.1:5001"
-							onChange={this.onDaemonChange}
-							required
-						/>
-					</Form.Item>
-					<Upload.Dragger
-						action=""
-						customRequest={this.onUpload}
-						onChange={this.onUploadChange}
-						fileList={this.state.fileList}>
-						<p className="ant-upload-drag-icon">
-							<Icon type="inbox" />
-						</p>
-						<p className="ant-upload-text">Click or drag file to this area to upload</p>
-					</Upload.Dragger>
-				</div>
-				<VersionDisplay />
-			</div>
+			<Upload.Dragger
+				action=""
+				customRequest={this.onUpload}
+				onChange={this.onUploadChange}
+				fileList={this.state.fileList}>
+				<p className="ant-upload-drag-icon">
+					<Icon type="inbox" />
+				</p>
+				<p className="ant-upload-text">Click or drag file to this area to upload</p>
+			</Upload.Dragger>
 		);
 	}
 
-	onDaemonChange = (e) => {
-		this.setState({
-			ipfsDaemon: e.target.value,
-		});
-		localStorage[IPFS_KEY] = e.target.value;
-	};
-
 	onUpload = async (param) => {
 		let encryptedResponse;
-		let endpoint = this.state.ipfsDaemon;
+		let endpoint = this.props.daemon;
 		let downloader = await getSelfIpfs();
 		browserEncrypt(param.file, (percent) => {
 			param.onProgress({ percent: percent / 10 });
