@@ -7,6 +7,7 @@ import sodium from 'libsodium-wrappers';
 import Decryptor from './lib/browserdecrypt';
 import FileMetadata from './components/FileMetadata';
 import VersionDisplay from './components/VersionDisplay';
+import { outer, inner } from './style';
 
 const IPFS_HOST = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5002';
 const STATE_DOWNLOAD_METADATA = 0;
@@ -14,15 +15,6 @@ const STATE_WAIT_USER = 1;
 const STATE_DOWNLOAD_DATA = 2;
 const STATE_READY_FOR_DOWNLOAD = 3;
 
-const outer = css`
-	padding-top: 100px;
-`;
-const inner = css`
-	width: 80%;
-	min-width: 100px;
-	max-width: 500px;
-	margin: auto;
-`;
 const progress = css`
 	display: flex;
 	justify-content: center;

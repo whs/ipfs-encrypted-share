@@ -3,6 +3,7 @@ import { css } from 'emotion';
 import { Input, Form, Popover, Button, Spin, Alert } from 'antd';
 import VersionDisplay from './components/VersionDisplay';
 import Uploader from './components/Uploader';
+import { outer, inner } from './style';
 import { getVersion } from './lib/ipfs';
 
 const IPFS_KEY = 'ipfsenc_ipfs';
@@ -10,19 +11,6 @@ const STATE_CHECK = 0;
 const STATE_ACTIVE = 1;
 const STATE_ERROR = 2;
 
-const outer = css`
-	padding-left: 10px;
-	padding-right: 10px;
-`;
-const inner = css`
-	max-width: 460px;
-	padding-top: 100px;
-	margin: auto;
-
-	@media (max-width: 768px) {
-		padding-top: 10px;
-	}
-`;
 const settings = css`
 	float: right;
 	margin-top: 10px;
