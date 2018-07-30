@@ -1,0 +1,13 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks.git
+  sha: v1.4.0
+  hooks:
+  - id: check-added-large-files
+  - id: check-case-conflict
+  - id: check-merge-conflict
+  - id: check-symlinks
+- repo: https://github.com/prettier/prettier.git
+  sha: 1.14.0
+  hooks:
+  - id: prettier
+    files: \.(css|less|scss|ts|tsx|graphql|gql|js|jsx|md)$
