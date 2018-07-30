@@ -8,6 +8,7 @@ import Decryptor from './lib/browserdecrypt';
 import FileMetadata from './components/FileMetadata';
 import VersionDisplay from './components/VersionDisplay';
 import { outer, inner } from './style';
+import PinGuide from './components/PinGuide';
 
 const IPFS_HOST = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5002';
 const STATE_DOWNLOAD_METADATA = 0;
@@ -63,6 +64,7 @@ export default class Download extends React.Component {
 					<Button type="primary" icon="download" size="large" onClick={this.startDownload}>
 						Start downloading
 					</Button>
+					<PinGuide hash={this.props.hash} />
 				</div>
 			);
 		} else if (this.state.state === STATE_DOWNLOAD_DATA) {
@@ -90,6 +92,7 @@ export default class Download extends React.Component {
 						download={this.state.metadata.filename}>
 						Save
 					</Button>
+					<PinGuide hash={this.props.hash} />
 				</div>
 			);
 		}

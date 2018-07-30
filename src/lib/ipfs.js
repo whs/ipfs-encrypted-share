@@ -3,20 +3,30 @@ import axios from 'axios';
 
 let selfIpfs = null;
 
-export const getSelfIpfs = () => {
+export const getSelfHash = () => {
 	if (selfIpfs) {
 		return selfIpfs;
 	}
 
 	if (process.env.NODE_ENV !== 'production') {
-		return Promise.resolve(window.location.toString());
+		return Promise.resolve('unsupported');
 	}
 
 	selfIpfs = axios.head(window.location).then((res) => {
 		let etag = res.headers.etag.replace(/"/g, '');
-		return `${window.location.protocol}//${window.location.host}/ipfs/${etag}`;
+		return etag;
 	});
 	return selfIpfs;
+};
+
+export const getSelfIpfs = () => {
+	if (process.env.NODE_ENV !== 'production') {
+		return Promise.resolve(window.location.toString());
+	}
+
+	return getSelfHash().then((etag) => {
+		return `${window.location.protocol}//${window.location.host}/ipfs/${etag}`;
+	});
 };
 
 export const getVersion = (endpoint) => {
