@@ -13,7 +13,7 @@ export const getSelfHash = () => {
 	}
 
 	selfIpfs = axios.head(window.location).then((res) => {
-		let etag = res.headers.etag.replace(/"/g, '');
+		let etag = res.headers.etag.replace(/"/g, '').replace(/^W\//, '');
 		return etag;
 	});
 	return selfIpfs;
